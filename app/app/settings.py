@@ -134,8 +134,8 @@ REST_FRAMEWORK = {
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'recipe-app-api',
-    'DESCRIPTION': 'Your project description',
+    'TITLE': 'Recipe app API !',
+    'DESCRIPTION': 'This is a Advance Django rest-api course.',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     # OTHER SETTINGS
