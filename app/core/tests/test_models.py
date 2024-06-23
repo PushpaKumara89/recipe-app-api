@@ -8,14 +8,18 @@ from decimal import Decimal
 from core import models
 
 
+def create_user(email='test@example.com', password='testpass123'):
+    return get_user_model().objects.create_user(email, password)
+
+
 class ModelTests(TestCase):
-    """Tet modlels."""
+    """Tet models."""
 
     def test_create_user_with_email_successful(self):
         """Test creating a new user with an email is successful."""
         email = 'test@example.com'
         password = 'testpass123'
-        user = get_user_model().objects.create_user(
+        user = create_user(
             email=email,
             password=password
         )
@@ -50,9 +54,9 @@ class ModelTests(TestCase):
 
     def test_create_recipe(self):
         """Test creating a recipe."""
-        user = get_user_model().objects.create_user(
-            'test@example.com',
-            'testpass123'
+        user = create_user(
+            email='test@example.com',
+            password='testpass123'
         )
 
         recipe = models.Recipe.objects.create(
@@ -64,3 +68,20 @@ class ModelTests(TestCase):
         )
 
         self.assertEqual(str(recipe), recipe.title)
+
+    def test_create_tag(self):
+        """Test creating a tag."""
+        user = create_user()
+        tag = models.Tag.objects.create(user=user, name='Tag1')
+
+        self.assertEqual(str(tag), tag.name)
+
+    def test_create_ingredient(self):
+        """ Test creating an Ingredient is Successful"""
+        user = create_user()
+        ingredient = models.Ingredient.objects.create(
+            user=user,
+            name='ingredient1'
+        )
+
+        self.assertEqual(str(ingredient), ingredient.name)
